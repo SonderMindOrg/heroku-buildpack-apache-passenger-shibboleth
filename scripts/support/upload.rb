@@ -2,28 +2,20 @@
 
 require 'aws-sdk'
 
-file_name = ARGV[0]
-if file_name.nil?
-  $stderr.puts 'usage: upload.rb file [prefix] [bucket]'
-  exit
-end
+def die(mess); $stderr.puts(mess); exit; end
 
-prefix = ARGV[1] || 'packages/cedar'
-bucket_name = ARGV[2] || 'uvize-buildpack'
-key_name = "#{prefix}/#{file_name}"
-path = Pathname.new(file_name)
+bucket, file, key = ARGV.take(3)
+die('usage: upload.rb bucket filename keyname') if bucket.nil? || file.nil? || key.nil?
 
-if !path.exist?
-  $stderr.puts "No file found at '#{file_name}'"
-  exit
-end
+path = Pathname.new(file)
+die("No file found at '#{file}'") if !path.exist?
 
 s3 = Aws::S3::Client.new(region: 'us-east-1')
-puts "Writing #{file_name} to #{bucket_name}/#{key_name}..."
+print "Writing #{file} to #{bucket}/#{key}..."
 s3.put_object(
-  bucket: bucket_name,
   acl: 'public-read',
-  key: key_name,
+  bucket: bucket,
+  key: key,
   body: File.open(path)
 )
-puts "...done"
+puts "done"
