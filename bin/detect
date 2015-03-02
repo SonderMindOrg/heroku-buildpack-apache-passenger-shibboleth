@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ -x $1/bin/ruby ] && [ -f $1/config/httpd.conf ] && [ -f $1/config/shibboleth2.xml ]; then
+  echo "Apache+Passenger+Shibboleth"
+  exit 0
+else
+  echo "Missing ruby, httpd.conf, or shibboleth2.xml"
+  exit 1
+fi
