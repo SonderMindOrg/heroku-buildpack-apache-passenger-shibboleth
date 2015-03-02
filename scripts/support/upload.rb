@@ -18,10 +18,12 @@ if !path.exist?
   exit
 end
 
-s3 = AWS::S3.new
-bucket = s3.buckets[bucket_name]
-obj = bucket.objects[key_name]
-
+s3 = Aws::S3::Client.new(region: 'us-east-1')
 puts "Writing #{file_name} to #{bucket_name}/#{key_name}..."
-obj.write(path, acl: :public_read)
+s3.put_object(
+  bucket: bucket_name,
+  acl: 'public-read',
+  key: key_name,
+  body: File.open(path)
+)
 puts "...done"
