@@ -7,7 +7,7 @@ set -eux
 # Make sure gpg is initialized
 gpg --list-keys
 
-get="curl -L -O"
+get="curl -s -L -O"
 verify="gpg --keyserver-options auto-key-retrieve --verify"
 extract="tar xzf"
 
