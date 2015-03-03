@@ -33,7 +33,7 @@ Your app will have working installations of the packages in the directories `/ap
 
 ### Configuration and running
 
-Example `httdp.conf` and `shibboleth2.xml` configuration files are included in the `examples` directory, along with a `web.sh` script demonstrating how the daemons could be run on a dyno. For now, these are merely illustrative, and you're encouraged to make your own versions in your project.
+Example `httdp.conf` and `shibboleth2.xml` configuration files are included in the `examples` directory, along with a `web.sh` script demonstrating how the daemons could be run on a dyno as the `web` entry in a `Procfile`. For now, these are merely illustrative, and you're encouraged to make your own versions in your project.
 
 ## Building
 
