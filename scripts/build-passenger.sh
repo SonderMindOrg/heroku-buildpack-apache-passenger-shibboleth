@@ -23,6 +23,8 @@ rm -f *.tar.gz*
 PREFIX=${INSTALL_DIR}/passenger
 
 pushd ${PASSENGER}
+# Passenger install script needs to be able to find Apache's apxs binary in the path
+export PATH=/app/opt/apache/bin:$PATH
 ./bin/passenger-install-apache2-module -a --languages ruby
 popd
 
