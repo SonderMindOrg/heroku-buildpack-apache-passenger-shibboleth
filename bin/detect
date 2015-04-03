@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ -x $1/bin/ruby ] && [ -f $1/config/httpd.conf ] && ([ -f $1/config/shibboleth2.xml ] || [ -f $1/config/shibboleth2.xml.erb ]); then
+if [ -x $1/bin/ruby ] && [ -f $1/config/httpd.conf ] && ([ -f $1/config/shibboleth/shibboleth2.xml ] || [ -f $1/config/shibboleth/shibboleth2.xml.erb ]); then
   echo "Apache+Passenger+Shibboleth"
   exit 0
 else
