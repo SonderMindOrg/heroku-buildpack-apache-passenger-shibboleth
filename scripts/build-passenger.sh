@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+PASSENGER_VERSION="4.0.59"
+
 source $(dirname "$0")/support/setup.sh
 
 BUILD_DIR=${APP_DIR}/build/passenger
@@ -7,7 +9,7 @@ BUILD_DIR=${APP_DIR}/build/passenger
 mkdir -p ${BUILD_DIR}
 cd ${BUILD_DIR}
 
-PASSENGER="passenger-4.0.59"
+PASSENGER="passenger-${PASSENGER_VERSION}"
 if [ ! -d "${PASSENGER}" ]; then
   ARCHIVE=${PASSENGER}.tar.gz
   if [ ! -f "${ARCHIVE}" ]; then

@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+BOOST_VERSION="1.52.0"
+LOG4SHIB_VERSION="1.0.9"
+XERCESC_VERSION="3.1.2"
+XMLSECURITYC_VERSION="1.7.3"
+XMLTOOLING_VERSION="1.5.4"
+OPENSAML_VERSION="2.5.4"
+SHIBBOLETHSP_VERSION="2.5.4"
+
 source $(dirname "$0")/support/setup.sh
 
 BUILD_DIR=${APP_DIR}/build/shibboleth
@@ -7,28 +15,28 @@ BUILD_DIR=${APP_DIR}/build/shibboleth
 mkdir -p ${BUILD_DIR}
 cd ${BUILD_DIR}
 
-BOOST="boost_1_52_0"
+BOOST="boost_${BOOST_VERSION//\./_}"
 if [ ! -d "${BOOST}" ]; then
   ARCHIVE=${BOOST}.tar.gz
   if [ ! -f "${ARCHIVE}" ]; then
     # No signature available, at least we can get from https.
-    $get https://downloads.sourceforge.net/project/boost/boost/1.52.0/${ARCHIVE}
+    $get https://downloads.sourceforge.net/project/boost/boost/${BOOST_VERSION}/${ARCHIVE}
   fi
   $extract ${ARCHIVE}
 fi
 
-LOG4SHIB="log4shib-1.0.9"
+LOG4SHIB="log4shib-${LOG4SHIB_VERSION}"
 if [ ! -d "${LOG4SHIB}" ]; then
   ARCHIVE=${LOG4SHIB}.tar.gz
   if [ ! -f "${ARCHIVE}" ]; then
-    $get http://shibboleth.net/downloads/log4shib/latest/${ARCHIVE}
-    $get https://shibboleth.net/downloads/log4shib/latest/${ARCHIVE}.asc
+    $get http://shibboleth.net/downloads/log4shib/${LOG4SHIB_VERSION}/${ARCHIVE}
+    $get https://shibboleth.net/downloads/log4shib/${LOG4SHIB_VERSION}/${ARCHIVE}.asc
     $verify ${ARCHIVE}.asc
   fi
   $extract ${ARCHIVE}
 fi
 
-XERCESC="xerces-c-3.1.1"
+XERCESC="xerces-c-${XERCESC_VERSION}"
 if [ ! -d "${XERCESC}" ]; then
   ARCHIVE=${XERCESC}.tar.gz
   if [ ! -f "${ARCHIVE}" ]; then
@@ -39,7 +47,7 @@ if [ ! -d "${XERCESC}" ]; then
   $extract ${XERCESC}.tar.gz
 fi
 
-XMLSECURITYC="xml-security-c-1.7.2"
+XMLSECURITYC="xml-security-c-${XMLSECURITYC_VERSION}"
 if [ ! -d "${XMLSECURITYC}" ]; then
   ARCHIVE=${XMLSECURITYC}.tar.gz
   if [ ! -f "${ARCHIVE}" ]; then
@@ -50,34 +58,34 @@ if [ ! -d "${XMLSECURITYC}" ]; then
   $extract ${ARCHIVE}
 fi
 
-XMLTOOLING="xmltooling-1.5.3"
+XMLTOOLING="xmltooling-${XMLTOOLING_VERSION}"
 if [ ! -d "${XMLTOOLING}" ]; then
   ARCHIVE=${XMLTOOLING}.tar.gz
   if [ ! -f "${ARCHIVE}" ]; then
-    $get http://shibboleth.net/downloads/c++-opensaml/2.5.3/${ARCHIVE}
-    $get https://shibboleth.net/downloads/c++-opensaml/2.5.3/${ARCHIVE}.asc
+    $get http://shibboleth.net/downloads/c++-opensaml/${OPENSAML_VERSION}/${ARCHIVE}
+    $get https://shibboleth.net/downloads/c++-opensaml/${OPENSAML_VERSION}/${ARCHIVE}.asc
     $verify ${ARCHIVE}.asc
   fi
   $extract ${ARCHIVE}
 fi
 
-OPENSAML="opensaml-2.5.3"
+OPENSAML="opensaml-${OPENSAML_VERSION}"
 if [ ! -d "${OPENSAML}" ]; then
   ARCHIVE=${OPENSAML}.tar.gz
   if [ ! -f "${ARCHIVE}" ]; then
-    $get http://shibboleth.net/downloads/c++-opensaml/2.5.3/${ARCHIVE}
-    $get https://shibboleth.net/downloads/c++-opensaml/2.5.3/${ARCHIVE}.asc
+    $get http://shibboleth.net/downloads/c++-opensaml/${OPENSAML_VERSION}/${ARCHIVE}
+    $get https://shibboleth.net/downloads/c++-opensaml/${OPENSAML_VERSION}/${ARCHIVE}.asc
     $verify ${ARCHIVE}.asc
   fi
   $extract ${ARCHIVE}
 fi
 
-SHIBBOLETHSP="shibboleth-sp-2.5.3"
+SHIBBOLETHSP="shibboleth-sp-${SHIBBOLETHSP_VERSION}"
 if [ ! -d "${SHIBBOLETHSP}" ]; then
   ARCHIVE=${SHIBBOLETHSP}.tar.gz
   if [ ! -f "${ARCHIVE}" ]; then
-    $get http://shibboleth.net/downloads/service-provider/latest/${ARCHIVE}
-    $get https://shibboleth.net/downloads/service-provider/latest/${ARCHIVE}.asc
+    $get http://shibboleth.net/downloads/service-provider/${SHIBBOLETHSP_VERSION}/${ARCHIVE}
+    $get https://shibboleth.net/downloads/service-provider/${SHIBBOLETHSP_VERSION}/${ARCHIVE}.asc
     $verify ${ARCHIVE}.asc
   fi
   $extract ${ARCHIVE}

@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+ZLIB_VERSION="1.2.8"
+PCRE_VERSION="8.37"
+APACHE_VERSION="2.4.12"
+
 source $(dirname "$0")/support/setup.sh
 
 BUILD_DIR=${APP_DIR}/build/apache
@@ -7,42 +11,42 @@ BUILD_DIR=${APP_DIR}/build/apache
 mkdir -p ${BUILD_DIR}
 cd ${BUILD_DIR}
 
-ZLIB="zlib-1.2.8"
+ZLIB="zlib-${ZLIB_VERSION}"
 if [ ! -d "${ZLIB}" ]; then
   ARCHIVE=${ZLIB}.tar.gz
   if [ ! -f "${ARCHIVE}" ]; then
-    $get http://downloads.sourceforge.net/project/libpng/zlib/1.2.8/${ARCHIVE}
-    $get https://downloads.sourceforge.net/project/libpng/zlib/1.2.8/Gnupg/${ARCHIVE}.asc
+    $get http://downloads.sourceforge.net/project/libpng/zlib/${ZLIB_VERSION}/${ARCHIVE}
+    $get https://downloads.sourceforge.net/project/libpng/zlib/${ZLIB_VERSION}/Gnupg/${ARCHIVE}.asc
     $verify ${ARCHIVE}.asc
   fi
   $extract ${ARCHIVE}
 fi
 
-PCRE="pcre-8.36"
+PCRE="pcre-${PCRE_VERSION}"
 if [ ! -d "${PCRE}" ]; then
   ARCHIVE=${PCRE}.tar.gz
   if [ ! -f "${ARCHIVE}" ]; then
-    $get http://downloads.sourceforge.net/project/pcre/pcre/8.36/${ARCHIVE}
-    $get https://downloads.sourceforge.net/project/pcre/pcre/8.36/${ARCHIVE}.sig
+    $get http://downloads.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/${ARCHIVE}
+    $get https://downloads.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/${ARCHIVE}.sig
     $verify ${ARCHIVE}.sig
   fi
   $extract ${ARCHIVE}
 fi
 
-APACHE="httpd-2.4.12"
+APACHE="httpd-${APACHE_VERSION}"
 if [ ! -d "${APACHE}" ]; then
   ARCHIVE=${APACHE}.tar.gz
   if [ ! -f "${ARCHIVE}" ]; then
-    $get http://httpd.apache.org/dev/dist/${ARCHIVE}
-    $get https://httpd.apache.org/dev/dist/${ARCHIVE}.asc
+    $get http://www.apache.org/dist/httpd/${ARCHIVE}
+    $get https://www.apache.org/dist/httpd/${ARCHIVE}.asc
     $verify ${ARCHIVE}.asc
   fi
   $extract ${ARCHIVE}
 
   ARCHIVE=${APACHE}-deps.tar.gz
   if [ ! -f "${ARCHIVE}" ]; then
-    $get http://httpd.apache.org/dev/dist/${ARCHIVE}
-    $get https://httpd.apache.org/dev/dist/${ARCHIVE}.asc
+    $get http://www.apache.org/dist/httpd/${ARCHIVE}
+    $get https://www.apache.org/dist/httpd/${ARCHIVE}.asc
     $verify ${ARCHIVE}.asc
   fi
   $extract ${ARCHIVE}
