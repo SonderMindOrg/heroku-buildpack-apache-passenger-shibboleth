@@ -2,10 +2,12 @@
 
 set -e
 
+STACK=${STACK:-cedar-14}
+
 cd $1
-curl -s https://s3.amazonaws.com/uvize-buildpack/packages/cedar/apache-2.4.12.tar.gz       | tar xz
-curl -s https://s3.amazonaws.com/uvize-buildpack/packages/cedar/passenger-4.0.59.tar.gz    | tar xz
-curl -s https://s3.amazonaws.com/uvize-buildpack/packages/cedar/shibboleth-sp-2.5.4.tar.gz | tar xz
-echo "-----> apache-passenger-shibboleth-buildpack: Installed Apache, Passenger, and Shibboleth to $1/opt"
+curl -s https://s3.amazonaws.com/uvize-buildpack/packages/${STACK}/apache-2.4.12.tar.gz       | tar xz
+curl -s https://s3.amazonaws.com/uvize-buildpack/packages/${STACK}/passenger-4.0.59.tar.gz    | tar xz
+curl -s https://s3.amazonaws.com/uvize-buildpack/packages/${STACK}/shibboleth-sp-2.5.4.tar.gz | tar xz
+echo "-----> apache-passenger-shibboleth-buildpack: Installed Apache, Passenger, and Shibboleth for ${STACK} to $1/opt"
 
 exit 0
